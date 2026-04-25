@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/users-test', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT full_name FROM users');
+        const [rows] = await db.query('SELECT user_id, full_name, email, role FROM users');
 
         res.json({
             message: 'Users loaded from database',
@@ -31,7 +31,6 @@ app.get('/api/users-test', async (req, res) => {
         });
     }
 });
-
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
