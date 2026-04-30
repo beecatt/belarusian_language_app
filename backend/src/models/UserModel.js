@@ -57,5 +57,6 @@ async function addExperiencePoints(userId, points) {
 module.exports = {
     findUserByEmail,
     findUserById,
-    createUser
+    createUser,
+    addExperiencePoints
 };
