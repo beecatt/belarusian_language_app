@@ -19,7 +19,31 @@ async function upsertProgress(progressData) {
         [user_id, topic_id, mastery_percent, completed_tasks_count]
     );
 }
+    async function getUserProgress(userId) {
+        const [rows] = await db.query(
+            `SELECT 
+            p.progress_id,
+            p.user_id,
+            p.topic_id,
+            t.topic_name,
+            t.school_class,
+            t.difficulty_level,
+            p.mastery_percent,
+            p.completed_tasks_count,
+            p.updated_at
+         FROM progress p
+         JOIN topics t ON p.topic_id = t.topic_id
+         WHERE p.user_id = ?
+         ORDER BY t.school_class, t.topic_name`,
+            [userId]
+        );
+
+        return rows;
+    }
+
+
 
 module.exports = {
-    upsertProgress
+    upsertProgress,
+    getUserProgress
 };
