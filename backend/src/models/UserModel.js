@@ -45,6 +45,15 @@ async function createUser(userData) {
     return result.insertId;
 }
 
+async function addExperiencePoints(userId, points) {
+    await db.query(
+        `UPDATE users
+         SET experience_points = experience_points + ?
+         WHERE user_id = ?`,
+        [points, userId]
+    );
+}
+
 module.exports = {
     findUserByEmail,
     findUserById,
