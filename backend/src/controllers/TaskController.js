@@ -2,6 +2,7 @@ const TaskModel = require('../models/TaskModel');
 const TaskResultModel = require('../models/TaskResultModel');
 const UserModel = require('../models/UserModel');
 const ProgressModel = require('../models/ProgressModel');
+const AchievementModel = require('../models/AchievementModel');
 
 async function getTasksByTopicId(req, res) {
     try {
@@ -98,13 +99,53 @@ async function submitTaskAnswer(req, res) {
             completed_tasks_count: completedTasksCount
         });
 
+        const newAchievements = [];
+
+        const totalCompletedTasks = await TaskResultModel.countCorrectOrPartialResultsByUser(userId);
+
+        if (totalCompletedTasks >= 1) {
+            const achievement = await AchievementModel.giveAchievementIfNotExists(
+                userId,
+                'Першы крок'
+            );
+
+            if (achievement) {
+                newAchievements.push('Першы крок');
+            }
+        }
+
+        const updatedUser = await UserModel.findUserById(userId);
+
+        if (updatedUser.experience_points >= 100) {
+            const achievement = await AchievementModel.giveAchievementIfNotExists(
+                userId,
+                'Упэўнены старт'
+            );
+
+            if (achievement) {
+                newAchievements.push('Упэўнены старт');
+            }
+        }
+
+        if (masteryPercent >= 80) {
+            const achievement = await AchievementModel.giveAchievementIfNotExists(
+                userId,
+                'Знаўца тэмы'
+            );
+
+            if (achievement) {
+                newAchievements.push('Знаўца тэмы');
+            }
+        }
+
         res.json({
             message: isCorrect ? 'Ответ правильный' : 'Ответ неправильный',
             is_correct: isCorrect,
             correct_answer: isCorrect ? undefined : task.correct_answer,
             score,
             mastery_percent: masteryPercent,
-            completed_tasks_count: completedTasksCount
+            completed_tasks_count: completedTasksCount,
+            new_achievements: newAchievements
         });
     } catch (error) {
         console.error(error);

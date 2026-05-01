@@ -20,6 +20,48 @@ async function getUserAchievements(userId) {
     return rows;
 }
 
+async function giveAchievementIfNotExists(userId, achievementName) {
+    const [achievements] = await db.query(
+        `SELECT achievement_id, bonus_points
+         FROM achievements
+         WHERE achievement_name = ?`,
+        [achievementName]
+    );
+
+    if (achievements.length === 0) {
+        return null;
+    }
+
+    const achievement = achievements[0];
+
+    const [existing] = await db.query(
+        `SELECT user_achievement_id
+         FROM user_achievements
+         WHERE user_id = ? AND achievement_id = ?`,
+        [userId, achievement.achievement_id]
+    );
+
+    if (existing.length > 0) {
+        return null;
+    }
+
+    await db.query(
+        `INSERT INTO user_achievements (user_id, achievement_id)
+         VALUES (?, ?)`,
+        [userId, achievement.achievement_id]
+    );
+
+    await db.query(
+        `UPDATE users
+         SET experience_points = experience_points + ?
+         WHERE user_id = ?`,
+        [achievement.bonus_points, userId]
+    );
+
+    return achievement;
+}
+
 module.exports = {
-    getUserAchievements
+    getUserAchievements,
+    giveAchievementIfNotExists
 };

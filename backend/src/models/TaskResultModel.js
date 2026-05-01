@@ -32,7 +32,21 @@ async function countCompletedTasksByTopic(userId, topicId) {
     return rows[0].completed_count;
 }
 
+async function countCorrectOrPartialResultsByUser(userId) {
+    const [rows] = await db.query(
+        `SELECT COUNT(*) AS total_count
+         FROM task_results
+         WHERE user_id = ?
+           AND completion_status IN ('correct', 'partial')`,
+        [userId]
+    );
+
+    return rows[0].total_count;
+}
+
+
 module.exports = {
     createTaskResult,
-    countCompletedTasksByTopic
+    countCompletedTasksByTopic,
+    countCorrectOrPartialResultsByUser
 };
