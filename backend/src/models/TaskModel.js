@@ -57,9 +57,83 @@ async function countTasksByTopic(topicId) {
     return rows[0].total_count;
 }
 
+async function createTask(taskData) {
+    const {
+        topic_id,
+        task_text,
+        task_type,
+        options_json,
+        correct_answer,
+        difficulty_level,
+        points
+    } = taskData;
+
+    const [result] = await db.query(
+        `INSERT INTO tasks 
+            (topic_id, task_text, task_type, options_json, correct_answer, difficulty_level, points)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [
+            topic_id,
+            task_text,
+            task_type,
+            options_json ? JSON.stringify(options_json) : null,
+            correct_answer,
+            difficulty_level,
+            points
+        ]
+    );
+
+    return result.insertId;
+}
+
+async function updateTask(taskId, taskData) {
+    const {
+        topic_id,
+        task_text,
+        task_type,
+        options_json,
+        correct_answer,
+        difficulty_level,
+        points
+    } = taskData;
+
+    await db.query(
+        `UPDATE tasks
+         SET topic_id = ?,
+             task_text = ?,
+             task_type = ?,
+             options_json = ?,
+             correct_answer = ?,
+             difficulty_level = ?,
+             points = ?
+         WHERE task_id = ?`,
+        [
+            topic_id,
+            task_text,
+            task_type,
+            options_json ? JSON.stringify(options_json) : null,
+            correct_answer,
+            difficulty_level,
+            points,
+            taskId
+        ]
+    );
+}
+
+async function deleteTask(taskId) {
+    await db.query(
+        'DELETE FROM tasks WHERE task_id = ?',
+        [taskId]
+    );
+}
+
+
 module.exports = {
     getTasksByTopicId,
     getTaskById,
     getTaskWithAnswerById,
-    countTasksByTopic
+    countTasksByTopic,
+    createTask,
+    updateTask,
+    deleteTask
 };
