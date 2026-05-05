@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Темы — Belarussian Language App</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo">Belarussian Language App</a>
+
+            <nav class="nav">
+                <a href="./index.html" class="btn btn--secondary">Главная</a>
+                <a href="./progress.html" class="btn btn--secondary">Прогресс</a>
+                <button class="btn btn--secondary" id="logout-btn">Выйти</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 style="margin-bottom: 20px;">Темы</h1>
+
+            <div id="topics-list" class="grid grid--3"></div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/topics.js"></script>
+</body>
+
+</html>
