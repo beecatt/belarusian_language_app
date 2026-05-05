@@ -1,0 +1,35 @@
+.form {
+    display: grid;
+    gap: 14px;
+}
+
+.form__group {
+    display: grid;
+    gap: 6px;
+}
+
+.form__label {
+    font-weight: 600;
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    background: #ffffff;
+}
+
+.form__textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form__input:focus,
+.form__select:focus,
+.form__textarea:focus {
+    outline: 2px solid var(--color-primary-light);
+    border-color: var(--color-primary);
+}

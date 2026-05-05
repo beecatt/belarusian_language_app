@@ -1,0 +1,79 @@
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.card__title {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.card__text {
+    margin-bottom: 16px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: var(--color-primary-dark);
+}
+
+.btn--secondary {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.btn--secondary:hover {
+    background: #d8eedb;
+}
+
+.btn--danger {
+    background: var(--color-error);
+}
+
+.badge {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.message {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+}
+
+.message--success {
+    background: #e8f5e9;
+    color: var(--color-success);
+}
+
+.message--error {
+    background: #ffebee;
+    color: var(--color-error);
+}
+
+.auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+}
