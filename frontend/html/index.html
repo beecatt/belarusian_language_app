@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belarussian Language App</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo">Belarussian Language App</a>
+
+            <nav class="nav">
+                <a href="./index.html" class="btn btn--secondary">Главная</a>
+                <a href="./topics.html" class="btn btn--secondary">Темы</a>
+                <a href="./progress.html" class="btn btn--secondary">Прогресс</a>
+                <a href="./auth.html" class="btn btn--secondary" id="auth-link">Вход</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="card">
+                <h1 class="card__title">Изучение белорусского языка</h1>
+                <p class="card__text">
+                    Приложение помогает школьникам повторять темы по белорусскому языку,
+                    выполнять задания, отслеживать прогресс и получать достижения.
+                </p>
+
+                <div class="nav">
+                    <a href="./auth.html" class="btn" id="start-learning-link">Начать обучение</a>
+                    <a href="./topics.html" class="btn btn--secondary">Посмотреть темы</a>
+                </div>
+            </section>
+
+            <section class="grid grid--3" style="margin-top: 24px;">
+                <div class="card">
+                    <h2 class="card__title">Темы</h2>
+                    <p class="card__text">
+                        Просматривайте темы школьной программы по белорусскому языку.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card__title">Задания</h2>
+                    <p class="card__text">
+                        Выполняйте тестовые и открытые задания по выбранным темам.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card__title">Прогресс</h2>
+                    <p class="card__text">
+                        Следите за процентом освоения тем и получайте достижения.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="../js/api.js"></script>
+    <script src="../js/index.js"></script>
+</body>
+
