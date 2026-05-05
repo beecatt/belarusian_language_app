@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Belarussian Language App</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="./index.html" class="logo">Belarussian Language App</a>
+
+            <nav class="nav">
+                <a href="./index.html" class="btn btn--secondary">Главная</a>
+                <a href="./topics.html" class="btn btn--secondary">Темы</a>
+                <a href="./progress.html" class="btn btn--secondary">Прогресс</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="card" style="max-width: 460px; margin: 0 auto;">
+                <div class="auth-tabs">
+                    <button class="btn" id="show-login-btn" type="button">Вход</button>
+                    <button class="btn btn--secondary" id="show-register-btn" type="button">Регистрация</button>
+                </div>
+
+                <div id="login-block">
+                    <h1 class="card__title">Вход</h1>
+                    <p class="card__text">Войдите, чтобы выполнять задания и сохранять прогресс.</p>
+
+                    <form class="form" id="login-form">
+                        <div class="form__group">
+                            <label class="form__label" for="login-email">Email</label>
+                            <input class="form__input" id="login-email" type="email" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label" for="login-password">Пароль</label>
+                            <input class="form__input" id="login-password" type="password" required>
+                        </div>
+
+                        <button class="btn" type="submit">Войти</button>
+                    </form>
+
+                    <div id="login-message"></div>
+                </div>
+
+                <div id="register-block" class="hidden">
+                    <h1 class="card__title">Регистрация</h1>
+                    <p class="card__text">Создайте аккаунт школьника для работы с приложением.</p>
+
+                    <form class="form" id="register-form">
+                        <div class="form__group">
+                            <label class="form__label" for="register-name">ФИО</label>
+                            <input class="form__input" id="register-name" type="text" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label" for="register-email">Email</label>
+                            <input class="form__input" id="register-email" type="email" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label" for="register-password">Пароль</label>
+                            <input class="form__input" id="register-password" type="password" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label" for="register-class">Класс</label>
+                            <select class="form__select" id="register-class" required>
+                                <option value="">Выберите класс</option>
+                                <option value="1">1 класс</option>
+                                <option value="2">2 класс</option>
+                                <option value="3">3 класс</option>
+                                <option value="4">4 класс</option>
+                                <option value="5">5 класс</option>
+                                <option value="6">6 класс</option>
+                                <option value="7">7 класс</option>
+                                <option value="8">8 класс</option>
+                                <option value="9">9 класс</option>
+                                <option value="10">10 класс</option>
+                                <option value="11">11 класс</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" type="submit">Зарегистрироваться</button>
+                    </form>
+
+                    <div id="register-message"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+
+</html>
