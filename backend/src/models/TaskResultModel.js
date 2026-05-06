@@ -44,9 +44,24 @@ async function countCorrectOrPartialResultsByUser(userId) {
     return rows[0].total_count;
 }
 
+async function hasSuccessfulResult(userId, taskId) {
+    const [rows] = await db.query(
+        `SELECT result_id
+         FROM task_results
+         WHERE user_id = ?
+           AND task_id = ?
+           AND completion_status IN ('correct', 'partial')
+         LIMIT 1`,
+        [userId, taskId]
+    );
+
+    return rows.length > 0;
+}
+
 
 module.exports = {
     createTaskResult,
     countCompletedTasksByTopic,
-    countCorrectOrPartialResultsByUser
+    countCorrectOrPartialResultsByUser,
+    hasSuccessfulResult
 };

@@ -61,26 +61,29 @@ async function submitTaskAnswer(req, res) {
                 message: 'Задание не найдено'
             });
         }
-
+        const alreadyCompleted = await TaskResultModel.hasSuccessfulResult(
+            userId,
+            task.task_id);
         const userAnswer = String(answer).trim().toLowerCase();
         const correctAnswer = String(task.correct_answer).trim().toLowerCase();
-
+        
         const isCorrect = userAnswer === correctAnswer;
 
-        const score = isCorrect ? task.points : 0;
+        const baseScore = isCorrect ? task.points : 0;
         const completionStatus = isCorrect ? 'correct' : 'incorrect';
+
+        const earnedScore = isCorrect && !alreadyCompleted ? baseScore : 0;
 
         await TaskResultModel.createTaskResult({
             user_id: userId,
             task_id: task.task_id,
             completion_status: completionStatus,
-            score
+            score: earnedScore
         });
 
-        if (score > 0) {
-            await UserModel.addExperiencePoints(userId, score);
+        if (earnedScore > 0) {
+            await UserModel.addExperiencePoints(userId, earnedScore);
         }
-
         const completedTasksCount = await TaskResultModel.countCompletedTasksByTopic(
             userId,
             task.topic_id
@@ -142,7 +145,9 @@ async function submitTaskAnswer(req, res) {
             message: isCorrect ? 'Ответ правильный' : 'Ответ неправильный',
             is_correct: isCorrect,
             correct_answer: isCorrect ? undefined : task.correct_answer,
-            score,
+            score: baseScore,
+            earned_score: earnedScore,
+            already_completed: alreadyCompleted,
             mastery_percent: masteryPercent,
             completed_tasks_count: completedTasksCount,
             new_achievements: newAchievements
@@ -265,6 +270,8 @@ async function deleteTask(req, res) {
         });
     }
 }
+
+
 
 module.exports = {
     getTasksByTopicId,
